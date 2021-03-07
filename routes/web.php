@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SiteController@index');
+
+Route::get('/register', 'SiteController@regForm');
+
+Route::post('/register', 'SiteController@register');
+
+Route::get('/confirm-email/{user}/{token}', 'SiteController@confirmEmail');

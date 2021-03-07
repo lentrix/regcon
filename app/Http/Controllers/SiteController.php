@@ -52,6 +52,7 @@ class SiteController extends Controller
         Mail::send('emails.email-confirm', ['user'=>$user], function($m) use ($user) {
             $m->from('membership@psite7.org', 'PSITE Regional Convention');
             $m->to($user->email, $user->lname . ", " . $user->fname);
+            $m->subject('Email Confirmation');
         });
     }
 

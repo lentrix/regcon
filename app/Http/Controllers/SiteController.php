@@ -10,7 +10,11 @@ use Mail;
 class SiteController extends Controller
 {
     public function index() {
-        return view('pages.login-form');
+        if(auth()->guest()) {
+            return view('pages.login-form');
+        }else {
+            return redirect('/dashboard');
+        }
     }
 
     public function regForm() {
@@ -59,5 +63,40 @@ class SiteController extends Controller
         }else {
             return view('/pages/invalid-token');
         }
+    }
+
+    public function login(Request $request) {
+        $this->validate($request,[
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $login = auth()->attempt([
+            'email' => $request['email'],
+            'password'=>$request['password']
+        ]);
+
+        if($login) {
+            $user = auth()->user();
+
+            if($user->email_verified_at) {
+                return redirect('/dashboard');
+            }else {
+                auth()->logout();
+                return view('pages.unverified-email',['user'=>$user]);
+            }
+
+        }else {
+            return redirect()->back()->with('Error','Invalid user credentials');
+        }
+    }
+
+    public function dashboard() {
+        return view('pages.dashboard');
+    }
+
+    public function logout() {
+        auth()->logout();
+        return redirect('/');
     }
 }

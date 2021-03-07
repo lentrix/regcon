@@ -20,3 +20,10 @@ Route::get('/register', 'SiteController@regForm');
 Route::post('/register', 'SiteController@register');
 
 Route::get('/confirm-email/{user}/{token}', 'SiteController@confirmEmail');
+
+Route::post('/login', 'SiteController@login');
+
+Route::group(['middleware'=>'auth'], function() {
+    Route::get('/dashboard', 'SiteController@dashboard');
+    Route::get('/logout', 'SiteController@logout');
+});

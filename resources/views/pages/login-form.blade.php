@@ -12,8 +12,8 @@
                     {!! Form::open(['url'=>'/login','method'=>'post']) !!}
 
                     <div class="form-group">
-                        {!! Form::label('username', "User Name",['class'=>'form-label']) !!}
-                        {!! Form::text('username', null, ['class'=>'form-control']) !!}
+                        {!! Form::label('email', "User Name",['class'=>'form-label']) !!}
+                        {!! Form::text('email', null, ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('password', "Password",['class'=>'form-label']) !!}

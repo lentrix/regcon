@@ -93,11 +93,17 @@ class SiteController extends Controller
     }
 
     public function dashboard() {
-        return view('pages.dashboard');
+        return view('pages.dashboard',[
+            'user' => auth()->user(),
+        ]);
     }
 
     public function logout() {
         auth()->logout();
         return redirect('/');
+    }
+
+    public function loginForm() {
+        return view('pages.login-form');
     }
 }

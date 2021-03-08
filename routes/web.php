@@ -23,7 +23,16 @@ Route::get('/confirm-email/{user}/{token}', 'SiteController@confirmEmail');
 
 Route::post('/login', 'SiteController@login');
 
+Route::get('/login', 'SiteController@loginForm');
+
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
+
+    Route::get('/user/edit/{user}', 'UserController@edit');
+    Route::post('/user/edit/{user}', 'UserController@update');
+    Route::post('/user/change-password/{user}', 'UserController@changePassword');
+
+    Route::post('image-cropper/upload','ImageCropperController@upload');
 });
+

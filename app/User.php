@@ -37,4 +37,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'voted_at' => 'datetime'
     ];
+
+    public function imgUrl() {
+
+        if(file_exists(public_path('upload/' . $this->id . '.png'))) {
+            return asset("upload/$this->id.png");
+        }else {
+            return asset('upload/default.png');
+        }
+
+        // return asset("upload/$this->id.png");
+
+    }
 }

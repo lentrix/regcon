@@ -35,4 +35,10 @@ class UserController extends Controller
 
         return redirect('/')->with("Info", 'Your password has been changed.');
     }
+
+    public function list() {
+        $users = User::whereNotNull('email_verified_at')
+                ->orderByRaw('lname, fname')->get();
+        return view('users.list', compact('users'));
+    }
 }

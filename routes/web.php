@@ -33,6 +33,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/user/edit/{user}', 'UserController@update');
     Route::post('/user/change-password/{user}', 'UserController@changePassword');
 
+    Route::get('/participants', 'UserController@list');
+
     Route::post('image-cropper/upload','ImageCropperController@upload');
 });
 

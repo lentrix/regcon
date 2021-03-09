@@ -24,7 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('role',20)->default('participant'); //admin, moderator
             $table->string('email_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->float('paid_amount')->nullable(); //
+            $table->float('paid_amount')->nullable();
+            $table->timestamp('nominated_at')->nullable();
             $table->timestamp('voted_at')->nullable();
             $table->string('password');
             $table->rememberToken();

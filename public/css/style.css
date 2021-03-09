@@ -30,5 +30,34 @@ body {
 
 .nav-item:hover {
     background-color: rgb(177, 2, 2);
-    border-radius: 10px;
+}
+
+.nav-link:hover{
+    color: yellow;
+}
+
+.participants-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.participants-list-box {
+    border: 1px solid rgb(0, 55, 107);
+    background-color: aliceblue;
+    margin-bottom: 20px;
+    display: flex;
+    height: 67px;
+    width: 320px;
+}
+
+.participants-list-box>.info{
+    line-height: 95%;
+    padding: 2px 5px;
+}
+
+.participant-list-img {
+    height: 65px;
+
 }

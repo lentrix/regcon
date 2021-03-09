@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
+use App\User;
 
 class UserSeeder extends Seeder
 {
@@ -12,23 +13,21 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
-            [
-                'email' => 'benjielenteria@yahoo.com',
-                'lname' => 'Lenteria',
-                'fname' => 'Benjie',
-                'designation' => 'Faculty',
-                'school' => 'Mater Dei College',
-                'phone' => '09173035716',
-                'phone' => '09173035716',
-                'role' => 'admin',
-                'email_verified_at' => Carbon::now(),
-                'password' => bcrypt('password123')
-            ]
+    $user = [
+            'email' => 'benjielenteria@yahoo.com',
+            'lname' => 'Lenteria',
+            'fname' => 'Benjie',
+            'designation' => 'Faculty',
+            'school' => 'Mater Dei College',
+            'phone' => '09173035716',
+            'phone' => '09173035716',
+            'role' => 'admin',
+            'email_verified_at' => Carbon::now(),
+            'password' => bcrypt('password123')
         ];
 
-        foreach($users as $user) {
-            \App\User::create($user);
-        }
+        User::create($user);
+
+        factory(User::class, 50)->create();
     }
 }

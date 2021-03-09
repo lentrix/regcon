@@ -18,11 +18,27 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $desg = ['Faculty','Faculty','Dean','Chairman','OIC','Administrator','IT Staff'];
+    $schl = [
+        'University of San Jose-Recolletos',
+        'Cebu Institute of Technology-University',
+        'Cebu Technological University',
+        'University of Bohol',
+        'Holy Name University',
+        'University of San Carlos',
+        'Mater Dei College',
+        'University of Cebu - Lapulapu-Mandaue',
+        'University of Cebu - Banilad'
+    ];
     return [
-        'name' => $faker->name,
+        'lname' => $faker->lastName,
+        'fname' => $faker->firstName,
+        'designation' => $desg[array_rand($desg)],
+        'school' => $schl[array_rand($schl)],
+        'phone' => $faker->phoneNumber,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => bcrypt('password'), // password
         'remember_token' => Str::random(10),
     ];
 });

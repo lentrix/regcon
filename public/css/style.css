@@ -27,3 +27,8 @@ body {
     border: 10px solid rgb(105, 1, 1);
     float: right;
 }
+
+.nav-item:hover {
+    background-color: rgb(177, 2, 2);
+    border-radius: 10px;
+}

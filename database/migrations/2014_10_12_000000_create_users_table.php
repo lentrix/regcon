@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string("designation");
             $table->string('school');
-            $table->string('phone', 15)->nullable();
+            $table->string('phone', 35)->nullable();
             $table->string('role',20)->default('participant'); //admin, moderator
             $table->string('email_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();

@@ -25,6 +25,21 @@
                 </li>
 
                 @auth
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url('/participants')}}">
+                        <i class="fa fa-users"></i> Participants
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url('/raffle')}}">
+                        <i class="fa fa-pie-chart"></i> Raffle
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url('/contact-us')}}">
+                        <i class="fa fa-hand-o-up"></i> Election
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url('/logout')}}" style="color: rgb(255, 182, 251)">
                         <i class="fa fa-sign-out"></i> Logout

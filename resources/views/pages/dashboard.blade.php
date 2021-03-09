@@ -34,7 +34,8 @@
     }
 </style>
 
-@include("partials.change-password-modal")
+@include("users.change-password-modal")
+@include("users.edit-modal")
 @include("partials.cropper-modal")
 
 <div class="row">
@@ -56,9 +57,11 @@
         <div>{{$user->school}}</div>
         <div>{{$user->email}}</div>
         <div>
-            <a href="{{url('/user/edit/' . $user->id)}}" class="btn btn-sm btn-info" title="Update Profile">
+
+            <button class="btn btn-info btn-sm" type="button" title="Edit Profile"
+                    data-bs-toggle="modal" data-bs-target="#editProfileModal">
                 <i class="fa fa-edit"></i>
-            </a>
+            </button>
             <button class="btn btn-warning btn-sm" type="button" title="Change password"
                     data-bs-toggle="modal" data-bs-target="#changePassModal">
                 <i class="fa fa-lock"></i>

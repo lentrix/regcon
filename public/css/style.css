@@ -50,6 +50,11 @@ body {
     display: flex;
     height: 67px;
     width: 320px;
+    cursor: pointer;
+}
+
+.participants-list-box:hover {
+    box-shadow: 0px 0px 7px rgb(117, 63, 63);
 }
 
 .participants-list-box>.info{

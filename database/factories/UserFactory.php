@@ -28,7 +28,8 @@ $factory->define(User::class, function (Faker $faker) {
         'University of San Carlos',
         'Mater Dei College',
         'University of Cebu - Lapulapu-Mandaue',
-        'University of Cebu - Banilad'
+        'University of Cebu - Banilad',
+        'Silliman University'
     ];
     return [
         'lname' => $faker->lastName,

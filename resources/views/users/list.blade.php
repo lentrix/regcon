@@ -8,7 +8,7 @@
         @foreach($users as $user)
 
         <div class="participants-list-box">
-            <img src='{{$user->imgUrl()}}' alt="pic" class="participant-list-img">
+            <img src='{{$user->imgUrl}}' alt="pic" class="participant-list-img">
             <div class="info">
                 <strong>{{$user->fname}} {{$user->lname}}</strong><br>
                 <i>{{$user->designation}}</i><br>

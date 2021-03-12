@@ -20,4 +20,5 @@ class ElectionController extends Controller
             return view('elections.pending');
         }
     }
+
 }

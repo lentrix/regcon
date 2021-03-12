@@ -19,6 +19,8 @@ class User extends Authenticatable
         'lname', 'fname', 'designation', 'school', 'phone', 'email', 'email_token', 'password',
     ];
 
+    protected $appends = ['imgUrl'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -38,7 +40,7 @@ class User extends Authenticatable
         'voted_at' => 'datetime'
     ];
 
-    public function imgUrl() {
+    public function getImgUrlAttribute() {
 
         if(file_exists(public_path('upload/' . $this->id . '.png'))) {
             return asset("upload/$this->id.png");

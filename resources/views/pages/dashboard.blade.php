@@ -40,7 +40,7 @@
 
 <div class="row">
     <div class="col-md-3" id="img-area" style="position: relative">
-        <img src="{{$user->imgUrl()}}" alt="" class="profile-pic margin: auto"> <br>
+        <img src="{{$user->imgUrl}}" alt="" class="profile-pic margin: auto"> <br>
         <input type="file" name="image" class="image">
         <button id="upload-img"
                 title="Upload a new profile picture"

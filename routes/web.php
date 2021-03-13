@@ -40,5 +40,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('image-cropper/upload','ImageCropperController@upload');
 
     Route::get('/search-participants/{key}', 'ElectionAPIController@participants');
+    Route::post('/nominate', 'ElectionAPIController@nominate');
+    Route::get('/check-nominated', 'ElectionAPIController@checkNominated');
 });
 

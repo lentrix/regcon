@@ -15,7 +15,7 @@ class CreateNominationsTable extends Migration
     {
         Schema::create('nominations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nominator')->unsigned();
+            $table->bigInteger('nominator')->unsigned()->unique();
             $table->bigInteger('nominee')->unsigned();
             $table->timestamps();
 

@@ -17,6 +17,7 @@ body {
 
 .content {
     padding: 20px; background-color: #f9fddc;
+    min-height: 450px;
 }
 
 .profile-pic {

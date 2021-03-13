@@ -51,4 +51,12 @@ class User extends Authenticatable
         // return asset("upload/$this->id.png");
 
     }
+
+    public function nominations() {
+        return $this->hasMany('App\Nomination', 'nominee','id');
+    }
+
+    public function nomination() {
+        return $this->hasOne('App\Nomination', 'nominator','id');
+    }
 }

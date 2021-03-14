@@ -2371,13 +2371,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       max: Number,
       candidates: [],
       votes: [],
-      voted: false
+      voted: false,
+      votedCandidates: []
     };
   },
   methods: {
@@ -2419,6 +2430,8 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.status = 201) {
           _this3.voted = true;
+
+          _this3.getVotedCandidates();
         }
       });
     },
@@ -2432,6 +2445,15 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       });
+    },
+    getVotedCandidates: function getVotedCandidates() {
+      var _this5 = this;
+
+      axios.get('/votes').then(function (response) {
+        if (response.status = 200) {
+          _this5.votedCandidates = response.data;
+        }
+      });
     }
   },
   created: function created() {
@@ -2440,6 +2462,7 @@ __webpack_require__.r(__webpack_exports__);
     if (!this.voted) {
       this.getMax();
       this.getCandidates();
+      this.getVotedCandidates();
     }
   }
 });
@@ -2458,7 +2481,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.nominee-block[data-v-654fad28] {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.nominee-pic[data-v-654fad28] {\r\n    width: 200px;\r\n    border-radius: 100px;\r\n    margin-right: 20px;\n}\n.nominee-info[data-v-654fad28] {\r\n    font-size: 1.4em;\r\n    line-height: 95%;\n}\r\n", ""]);
+exports.push([module.i, "\n.nominee-block[data-v-654fad28] {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n.nominee-pic[data-v-654fad28] {\n    width: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n.nominee-info[data-v-654fad28] {\n    font-size: 1.4em;\n    line-height: 95%;\n}\n", ""]);
 
 // exports
 
@@ -2477,7 +2500,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color:rgb(245, 245, 245);\r\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\r\n    font-size: 1.6em;\r\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\r\n    width: 200px;\r\n    height: 200px;\r\n    border-radius: 100px;\r\n    margin-right: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    border-radius: 20px;\n    background-color:rgb(245, 245, 245);\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\n    font-size: 1.6em;\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n", ""]);
 
 // exports
 
@@ -2496,7 +2519,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.user-box[data-v-5f90d0f5] {\r\n    display: flex;\r\n    padding: 10px;\r\n    background-color: #e6e6e6;\r\n    margin-bottom: 20px;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    cursor: pointer;\n}\n.user-box[data-v-5f90d0f5]:hover {\r\n    box-shadow: 0px 0px 5px 1px #444;\n}\n.user-pic[data-v-5f90d0f5] {\r\n    width: 110px;\r\n    height: 110px;\r\n    border-radius: 55px;\r\n    margin-right: 10px;\n}\n.user-info[data-v-5f90d0f5] {\r\n    font-size: 1.2em;\r\n    line-height: 98%;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.user-box[data-v-5f90d0f5] {\n    display: flex;\n    padding: 10px;\n    background-color: #e6e6e6;\n    margin-bottom: 20px;\n    justify-content: flex-start;\n    align-items: center;\n    cursor: pointer;\n}\n.user-box[data-v-5f90d0f5]:hover {\n    box-shadow: 0px 0px 5px 1px #444;\n}\n.user-pic[data-v-5f90d0f5] {\n    width: 110px;\n    height: 110px;\n    border-radius: 55px;\n    margin-right: 10px;\n}\n.user-info[data-v-5f90d0f5] {\n    font-size: 1.2em;\n    line-height: 98%;\n}\n\n", ""]);
 
 // exports
 
@@ -21040,9 +21063,9 @@ var render = function() {
                       _c("i", [_vm._v(_vm._s(_vm.nominee.designation))]),
                       _c("br"),
                       _vm._v(
-                        "\r\n                    " +
+                        "\n                    " +
                           _vm._s(_vm.nominee.school) +
-                          "\r\n                "
+                          "\n                "
                       )
                     ])
                   ])
@@ -21078,7 +21101,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fa fa-check" }),
-                _vm._v("\r\n            Nominate\r\n        ")
+                _vm._v("\n            Nominate\n        ")
               ]
             )
           ])
@@ -21550,7 +21573,35 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.voted
-      ? _c("div", [_c("h1", [_vm._v("You have voted for... Thanks!")])])
+      ? _c(
+          "div",
+          [
+            _c("h1", [_vm._v("You have voted the following...")]),
+            _vm._v(" "),
+            _vm._l(_vm.votedCandidates, function(vc, index) {
+              return _c("div", { key: index, staticClass: "user-box" }, [
+                _c("img", {
+                  staticClass: "user-pic",
+                  attrs: { src: vc.imgUrl, alt: "" }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "user-info" }, [
+                  _c("strong", [
+                    _vm._v(_vm._s(vc.lname) + ", " + _vm._s(vc.fname))
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("i", [_vm._v(_vm._s(vc.designation))]),
+                  _c("br"),
+                  _vm._v(
+                    "\n                " + _vm._s(vc.school) + "\n            "
+                  )
+                ])
+              ])
+            })
+          ],
+          2
+        )
       : _vm._e()
   ])
 }
@@ -34215,8 +34266,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\hawkm\web\regcon\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\hawkm\web\regcon\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/lntrx/web/regcon/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/lntrx/web/regcon/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

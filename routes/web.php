@@ -51,6 +51,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/get-max', 'ElectionAPIController@getMax');
     Route::get('/has-voted', 'ElectionAPIController@getHasVoted');
     Route::post('/submit-vote', 'ElectionAPIController@submitVote');
+    Route::get('/votes', 'ElectionAPIController@getVotedCandidates');
 
     Route::get('/clear-cache', function() {
         if(auth()->user()->id==1) {

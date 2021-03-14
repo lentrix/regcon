@@ -7,6 +7,7 @@ use App\Nomination;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\User;
+use App\Vote;
 
 class ElectionAPIController extends Controller
 {
@@ -88,8 +89,25 @@ class ElectionAPIController extends Controller
     }
 
     public function submitVote(Request $request) {
+        $user = $request->user();
+        $max = $this->getMax();
         foreach($request['votes'] as $voteItem) {
-            echo $voteItem['id'] . ", ";
+
+            if($user->countVotes()<3){
+                Vote::create([
+                    'user_id'=>$user->id,
+                    'candidate_user_id' => $voteItem['id']
+                ]);
+            }
+
         }
+        $user->voted_at = Carbon::now();
+        $user->save();
+        return ['success'=>'Votes have been saved.'];
+    }
+
+    public function getVotedCandidates() {
+        $user = auth()->user();
+        return User::whereIn('id', Vote::where('user_id', $user->id)->select('candidate_user_id'))->get();
     }
 }

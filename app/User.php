@@ -59,4 +59,12 @@ class User extends Authenticatable
     public function nomination() {
         return $this->hasOne('App\Nomination', 'nominator','id');
     }
+
+    public function votes() {
+        return $this->hasMany('App\Vote','user_id', 'id');
+    }
+
+    public function countVotes() {
+        return \App\Vote::where('user_id',$this->id)->count();
+    }
 }

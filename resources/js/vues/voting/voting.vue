@@ -41,7 +41,17 @@
             </div>
         </div>
     <div v-if="voted">
-            <h1>You have voted for... Thanks!</h1>
+            <h1>You have voted the following...</h1>
+            <div class="user-box"
+                    v-for="(vc, index) in votedCandidates"
+                    :key="index">
+                <img :src="vc.imgUrl" alt="" class="user-pic">
+                <div class="user-info">
+                    <strong>{{vc.lname}}, {{vc.fname}}</strong><br>
+                    <i>{{vc.designation}}</i><br>
+                    {{vc.school}}
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -54,7 +64,8 @@ export default ({
             max: Number,
             candidates: [],
             votes: [],
-            voted: false
+            voted: false,
+            votedCandidates: []
         }
     },
     methods: {
@@ -92,6 +103,7 @@ export default ({
             }).then(response=>{
                 if(response.status=201) {
                     this.voted = true;
+                    this.getVotedCandidates();
                 }
             })
         },
@@ -104,6 +116,14 @@ export default ({
                     }
                 }
             })
+        },
+        getVotedCandidates: function() {
+            axios.get('/votes')
+            .then(response=>{
+                if(response.status=200) {
+                    this.votedCandidates = response.data;
+                }
+            })
         }
     },
     created() {
@@ -111,6 +131,7 @@ export default ({
         if(!this.voted) {
             this.getMax();
             this.getCandidates();
+            this.getVotedCandidates();
         }
     }
 })

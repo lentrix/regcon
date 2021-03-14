@@ -81,4 +81,15 @@ class ElectionAPIController extends Controller
     public function getMax() {
         return config('election.candidates_to_vote');
     }
+
+    public function getHasVoted() {
+        $user = auth()->user();
+        return $user->voted_at;
+    }
+
+    public function submitVote(Request $request) {
+        foreach($request['votes'] as $voteItem) {
+            echo $voteItem['id'] . ", ";
+        }
+    }
 }

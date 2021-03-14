@@ -2349,12 +2349,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       max: Number,
       candidates: [],
-      votes: []
+      votes: [],
+      voted: false
     };
   },
   methods: {
@@ -2376,18 +2399,48 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    addCandidate: function addCandidate(candidate) {
-      if (this.votes.length > this.max) {
+    addCandidate: function addCandidate(candidate, index) {
+      if (this.votes.length >= this.max) {
         alert('You have reached the maximum number of votes.');
       } else {
         this.votes.push(candidate);
-        this.candidates.remove(candidate);
+        this.candidates.splice(index, 1);
       }
+    },
+    removeVote: function removeVote(vote, index) {
+      this.candidates.push(vote);
+      this.votes.splice(index, 1);
+    },
+    submitVote: function submitVote() {
+      var _this3 = this;
+
+      axios.post('/submit-vote', {
+        votes: this.votes
+      }).then(function (response) {
+        if (response.status = 201) {
+          _this3.voted = true;
+        }
+      });
+    },
+    checkHasVoted: function checkHasVoted() {
+      var _this4 = this;
+
+      axios.get('/has-voted').then(function (response) {
+        if (response.status == 200) {
+          if (response.data) {
+            _this4.voted = true;
+          }
+        }
+      });
     }
   },
   created: function created() {
-    this.getMax();
-    this.getCandidates();
+    this.checkHasVoted();
+
+    if (!this.voted) {
+      this.getMax();
+      this.getCandidates();
+    }
   }
 });
 
@@ -2405,7 +2458,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.nominee-block[data-v-654fad28] {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n}\n.nominee-pic[data-v-654fad28] {\n    width: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n.nominee-info[data-v-654fad28] {\n    font-size: 1.4em;\n    line-height: 95%;\n}\n", ""]);
+exports.push([module.i, "\n.nominee-block[data-v-654fad28] {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\n}\n.nominee-pic[data-v-654fad28] {\r\n    width: 200px;\r\n    border-radius: 100px;\r\n    margin-right: 20px;\n}\n.nominee-info[data-v-654fad28] {\r\n    font-size: 1.4em;\r\n    line-height: 95%;\n}\r\n", ""]);
 
 // exports
 
@@ -2424,7 +2477,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    border-radius: 20px;\n    background-color:rgb(245, 245, 245);\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\n    font-size: 1.6em;\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\r\n    display: flex;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    border-radius: 20px;\r\n    background-color:rgb(245, 245, 245);\r\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\r\n    font-size: 1.6em;\r\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\r\n    width: 200px;\r\n    height: 200px;\r\n    border-radius: 100px;\r\n    margin-right: 20px;\n}\r\n", ""]);
 
 // exports
 
@@ -2443,7 +2496,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.user-box[data-v-5f90d0f5] {\n    display: flex;\n    padding: 10px;\n    background-color: #e6e6e6;\n    margin-bottom: 20px;\n    justify-content: flex-start;\n    align-items: center;\n    cursor: pointer;\n}\n.user-box[data-v-5f90d0f5]:hover {\n    box-shadow: 0px 0px 5px 1px #444;\n}\n.user-pic[data-v-5f90d0f5] {\n    width: 110px;\n    height: 110px;\n    border-radius: 55px;\n    margin-right: 10px;\n}\n.user-info[data-v-5f90d0f5] {\n    font-size: 1.2em;\n    line-height: 98%;\n}\n\n", ""]);
+exports.push([module.i, "\n.user-box[data-v-5f90d0f5] {\r\n    display: flex;\r\n    padding: 10px;\r\n    background-color: #e6e6e6;\r\n    margin-bottom: 20px;\r\n    justify-content: flex-start;\r\n    align-items: center;\r\n    cursor: pointer;\n}\n.user-box[data-v-5f90d0f5]:hover {\r\n    box-shadow: 0px 0px 5px 1px #444;\n}\n.user-pic[data-v-5f90d0f5] {\r\n    width: 110px;\r\n    height: 110px;\r\n    border-radius: 55px;\r\n    margin-right: 10px;\n}\n.user-info[data-v-5f90d0f5] {\r\n    font-size: 1.2em;\r\n    line-height: 98%;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -20987,9 +21040,9 @@ var render = function() {
                       _c("i", [_vm._v(_vm._s(_vm.nominee.designation))]),
                       _c("br"),
                       _vm._v(
-                        "\n                    " +
+                        "\r\n                    " +
                           _vm._s(_vm.nominee.school) +
-                          "\n                "
+                          "\r\n                "
                       )
                     ])
                   ])
@@ -21025,7 +21078,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fa fa-check" }),
-                _vm._v("\n            Nominate\n        ")
+                _vm._v("\r\n            Nominate\r\n        ")
               ]
             )
           ])
@@ -21374,62 +21427,131 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "alert alert-info" }, [
-      _vm._v(
-        "\n        We are now at the voting phase of our election.\n        Please select a maximum of " +
-          _vm._s(_vm.max) +
-          " candidates.\n    "
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-md-6" },
-        [
-          _c("h3", [_vm._v("List of Candidates")]),
+    !_vm.voted
+      ? _c("div", [
+          _c("div", { staticClass: "alert alert-info" }, [
+            _vm._v(
+              "\n            We are now at the voting phase of our election.\n            Please select a maximum of " +
+                _vm._s(_vm.max) +
+                " candidates.\n        "
+            )
+          ]),
           _vm._v(" "),
-          _vm._l(_vm.candidates, function(can, index) {
-            return _c(
+          _c("div", { staticClass: "row" }, [
+            _c(
               "div",
-              {
-                key: index,
-                staticClass: "user-box",
-                on: {
-                  click: function($event) {
-                    return _vm.addCandidate(can)
-                  }
-                }
-              },
+              { staticClass: "col-md-6" },
               [
-                _c("img", {
-                  staticClass: "user-pic",
-                  attrs: { src: can.imgUrl, alt: "" }
+                _c("h3", [_vm._v("List of Candidates")]),
+                _vm._v(" "),
+                _vm._l(_vm.candidates, function(can, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "user-box",
+                      on: {
+                        click: function($event) {
+                          return _vm.addCandidate(can, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-pic",
+                        attrs: { src: can.imgUrl, alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "user-info" }, [
+                        _c("strong", [
+                          _vm._v(_vm._s(can.lname) + ", " + _vm._s(can.fname))
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("i", [_vm._v(_vm._s(can.designation))]),
+                        _c("br"),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(can.school) +
+                            "\n                    "
+                        )
+                      ])
+                    ]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c("h3", [_vm._v("You are voting for...")]),
+                _vm._v(" "),
+                _vm._l(_vm.votes, function(vote, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "user-box",
+                      on: {
+                        click: function($event) {
+                          return _vm.removeVote(vote, index)
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        staticClass: "user-pic",
+                        attrs: { src: vote.imgUrl, alt: "" }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "user-info" }, [
+                        _c("strong", [
+                          _vm._v(_vm._s(vote.lname) + ", " + _vm._s(vote.fname))
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("i", [_vm._v(_vm._s(vote.designation))]),
+                        _c("br"),
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(vote.school) +
+                            "\n                    "
+                        )
+                      ])
+                    ]
+                  )
                 }),
                 _vm._v(" "),
-                _c("div", { staticClass: "user-info" }, [
-                  _c("strong", [
-                    _vm._v(_vm._s(can.lname) + ", " + _vm._s(can.fname))
-                  ]),
-                  _c("br"),
-                  _vm._v(" "),
-                  _c("i", [_vm._v(_vm._s(can.designation))]),
-                  _c("br"),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(can.school) +
-                      "\n                "
-                  )
-                ])
-              ]
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary btn-lg",
+                    on: {
+                      click: function($event) {
+                        return _vm.submitVote()
+                      }
+                    }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-check" }),
+                    _vm._v(
+                      "\n                    Submit Vote\n                "
+                    )
+                  ]
+                )
+              ],
+              2
             )
-          })
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" })
-    ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.voted
+      ? _c("div", [_c("h1", [_vm._v("You have voted for... Thanks!")])])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -34093,8 +34215,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/lntrx/web/regcon/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/lntrx/web/regcon/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\hawkm\web\regcon\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\hawkm\web\regcon\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

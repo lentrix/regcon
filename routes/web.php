@@ -49,11 +49,13 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/get-candidates', 'ElectionAPIController@getCandidates');
     Route::put('/candidate', 'ElectionAPIController@removeCandidate');
     Route::get('/get-max', 'ElectionAPIController@getMax');
+    Route::get('/has-voted', 'ElectionAPIController@getHasVoted');
+    Route::post('/submit-vote', 'ElectionAPIController@submitVote');
 
     Route::get('/clear-cache', function() {
         if(auth()->user()->id==1) {
             $exitCode = Artisan::call('config:cache');
-            return redirect('/')->with('Info','Application cache has been cleared.');
+            return redirect('/dashboard')->with('Info','Application cache has been cleared.');
         }else {
             return null;
         }

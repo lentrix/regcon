@@ -77,4 +77,8 @@ class ElectionAPIController extends Controller
             return ['success'=>'Candidate deleted.'];
         }
     }
+
+    public function getMax() {
+        return config('election.candidates_to_vote');
+    }
 }

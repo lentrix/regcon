@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'election_phase' => 'selection',
+    'election_phase' => 'votation',
     'candidates_to_vote' => 3
 ];

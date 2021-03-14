@@ -2,6 +2,7 @@
     <div>
         <search-form v-if="currentPhase('nomination')"></search-form>
         <selection v-if="currentPhase('selection')"></selection>
+        <voting v-if="currentPhase('votation')" max=3></voting>
     </div>
 </template>
 
@@ -9,15 +10,17 @@
 
 import SearchForm from './nomination/search-form'
 import Selection from './nomination/selection'
+import Voting from './voting/voting'
 
 export default({
     data:function(){
         return {
-            phase: 'pending'
+            phase: 'pending',
         }
     },
     components: {
         SearchForm,
+        Voting,
         Selection
     },
     methods: {

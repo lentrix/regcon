@@ -48,6 +48,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/create-candidate', 'ElectionAPIController@createCandidate');
     Route::get('/get-candidates', 'ElectionAPIController@getCandidates');
     Route::put('/candidate', 'ElectionAPIController@removeCandidate');
+    Route::get('/get-max', 'ElectionAPIController@getMax');
 
     Route::get('/clear-cache', function() {
         if(auth()->user()->id==1) {

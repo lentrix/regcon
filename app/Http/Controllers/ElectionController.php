@@ -18,7 +18,7 @@ class ElectionController extends Controller
             return view('elections.nomination', compact('user'));
         }else if($phase=="selection") {
             return view('elections.selection', compact('user'));
-        }else if($phase=='election') {
+        }else if($phase=='votation') {
             return view('elections.election', compact('user'));
         }else {
             return view('elections.pending');

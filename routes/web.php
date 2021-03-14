@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,5 +43,19 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/search-participants/{key}', 'ElectionAPIController@participants');
     Route::post('/nominate', 'ElectionAPIController@nominate');
     Route::get('/check-nominated', 'ElectionAPIController@checkNominated');
+    Route::get('/check-phase', "ElectionAPIController@checkPhase");
+    Route::get('/nominees', 'ElectionAPIController@getNominees');
+    Route::post('/create-candidate', 'ElectionAPIController@createCandidate');
+    Route::get('/get-candidates', 'ElectionAPIController@getCandidates');
+    Route::put('/candidate', 'ElectionAPIController@removeCandidate');
+
+    Route::get('/clear-cache', function() {
+        if(auth()->user()->id==1) {
+            $exitCode = Artisan::call('config:cache');
+            return redirect('/')->with('Info','Application cache has been cleared.');
+        }else {
+            return null;
+        }
+    });
 });
 

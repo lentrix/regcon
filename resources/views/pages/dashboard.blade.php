@@ -48,6 +48,7 @@
                 style="position: absolute; bottom:13px; right: 98px; visibility: hidden">
             <i class="fa fa-camera"></i>
         </button>
+
     </div>
     <div class="col-md-4">
         <div style="font-size: 1.6em; font-weight: bold; text-transform: uppercase">
@@ -66,6 +67,11 @@
                     data-bs-toggle="modal" data-bs-target="#changePassModal">
                 <i class="fa fa-lock"></i>
             </button>
+            @if($user->id==1)
+            <a href="{{url('/clear-cache')}}" class="btn btn-secondary btn-sm">
+                <i class="fa fa-recycle"></i>
+            </a>
+            @endif
         </div>
     </div>
 </div>

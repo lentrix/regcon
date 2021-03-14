@@ -9,11 +9,15 @@ class ElectionController extends Controller
 {
     public function index() {
 
-        $phase = "nomination";
+        $phase = config('election.election_phase');
+        $voteNum = config('election.candidates_to_vote');
+
         $user = auth()->user();
 
         if($phase=='nomination') {
             return view('elections.nomination', compact('user'));
+        }else if($phase=="selection") {
+            return view('elections.selection', compact('user'));
         }else if($phase=='election') {
             return view('elections.election', compact('user'));
         }else {

@@ -14,13 +14,13 @@ class CreateNominationsTable extends Migration
     public function up()
     {
         Schema::create('nominations', function (Blueprint $table) {
-            $table->id();
             $table->bigInteger('nominator')->unsigned()->unique();
             $table->bigInteger('nominee')->unsigned();
             $table->timestamps();
 
             $table->foreign('nominator')->references('id')->on('users');
             $table->foreign('nominee')->references('id')->on('users');
+            $table->primary('nominator');
         });
     }
 

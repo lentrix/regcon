@@ -5,7 +5,7 @@
 <h2>PSITE-7 Officers' Election (Nomination)</h2>
 
 <div id="main-app">
-    <main-app></main-app>
+    <main-app :phase="'nomination'"></main-app>
 </div>
 
 @endsection

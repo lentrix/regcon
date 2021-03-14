@@ -96,6 +96,7 @@ export default({
         },
         hasNominated: function(nominee) {
             this.nominated = true;
+            this.notNominated=false;
             this.nominatedUser = nominee;
         },
         checkNominated: function() {

@@ -14,14 +14,14 @@ class CreateCandidatesTable extends Migration
     public function up()
     {
         Schema::create('candidates', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->unique();
             $table->string('status')->nullable(); //accepted or declined
             $table->string('reason')->nullable(); //reason for declining
             $table->string('tagline')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->primary('user_id');
         });
     }
 

@@ -67,4 +67,8 @@ class User extends Authenticatable
     public function countVotes() {
         return \App\Vote::where('user_id',$this->id)->count();
     }
+
+    public function candidate() {
+        return $this->hasOne('App\Candidate');
+    }
 }

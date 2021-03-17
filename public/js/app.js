@@ -2500,7 +2500,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\n    display: flex;\n    justify-content: flex-start;\n    align-items: center;\n    border-radius: 20px;\n    background-color:rgb(245, 245, 245);\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\n    font-size: 1.6em;\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.nominee-box[data-v-9e20cb1c] {\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-start;\n    align-items: center;\n    border-radius: 20px;\n    background-color:rgb(245, 245, 245);\n    padding: 20px;\n}\n.nominee-info[data-v-9e20cb1c] {\n    font-size: 1.6em;\n    line-height: 98%;\n}\n.nominee-pic[data-v-9e20cb1c] {\n    width: 200px;\n    height: 200px;\n    border-radius: 100px;\n    margin-right: 20px;\n}\n", ""]);
 
 // exports
 

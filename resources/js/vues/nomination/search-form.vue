@@ -122,6 +122,7 @@ export default({
 <style scoped>
 .nominee-box {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
     border-radius: 20px;

@@ -39,5 +39,7 @@ class AdminController extends Controller
         ]);
     }
 
-
+    public function user(User $user) {
+        return view('admin.user', compact('user'));
+    }
 }

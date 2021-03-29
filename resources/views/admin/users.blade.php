@@ -2,7 +2,21 @@
 
 @section('content')
 
-<h1>Administration | Users</h1>
+<div class="row">
+    <div class="col-md-7">
+        <h1>
+            Administration | Users
+        </h1>
+    </div>
+    <div class="col-md-5">
+        <nav aria-label="breadcrumb" style="float: right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{url('/admin')}}">Admin</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Users</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 
 <div class="float-left">
     {!! Form::open(['url'=>'/admin/users','method'=>'get']) !!}
@@ -82,9 +96,9 @@
             </td>
             <td></td>
             <td class="text-center">
-                <button class="btn btn-dark btn-sm" title="Manage this user">
+                <a href='{{url("/admin/user/$user->id")}}' class="btn btn-dark btn-sm" title="Manage this user">
                     <i class="fa fa-cog"></i>
-                </button>
+                </a>
             </td>
         </tr>
         @endforeach

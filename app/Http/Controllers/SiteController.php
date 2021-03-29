@@ -106,4 +106,8 @@ class SiteController extends Controller
     public function loginForm() {
         return view('pages.login-form');
     }
+
+    public function unauthorized() {
+        return view('pages.unauthorized');
+    }
 }

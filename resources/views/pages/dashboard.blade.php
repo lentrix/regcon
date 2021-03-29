@@ -66,6 +66,11 @@
                     data-bs-toggle="modal" data-bs-target="#changePassModal">
                 <i class="fa fa-lock"></i>
             </button>
+            @if($user->role=='admin' || $user->role=='moderator')
+            <a href="{{url('/admin/')}}" class="btn btn-secondary btn-sm" title="Admin Page">
+                <i class="fa fa-cog"></i>
+            </a>
+            @endif
         </div>
     </div>
 </div>

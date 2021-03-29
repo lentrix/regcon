@@ -25,6 +25,8 @@ Route::post('/login', 'SiteController@login');
 
 Route::get('/login', 'SiteController@loginForm');
 
+Route::get('/unauthorized','SiteController@unauthorized');
+
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
@@ -36,5 +38,14 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/participants', 'UserController@list');
 
     Route::post('image-cropper/upload','ImageCropperController@upload');
+
+    Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
+        Route::get('/', 'AdminController@index');
+        Route::get('/convention/create', 'ConventionController@create');
+        Route::post('/convention', 'ConventionController@store');
+        Route::get('/convention/activate/{convention}', 'ConventionController@activate');
+
+        Route::post('/election/status', 'ElectionController@changeState');
+    });
 });
 

@@ -12,7 +12,7 @@
                     {!! Form::open(['url'=>'/login','method'=>'post']) !!}
 
                     <div class="form-group">
-                        {!! Form::label('email', "User Name",['class'=>'form-label']) !!}
+                        {!! Form::label('email', "Email",['class'=>'form-label']) !!}
                         {!! Form::text('email', null, ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">

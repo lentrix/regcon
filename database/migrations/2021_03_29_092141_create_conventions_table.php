@@ -18,9 +18,11 @@ class CreateConventionsTable extends Migration
             $table->string('title');
             $table->string('host_school');
             $table->string('chairman');
+            $table->string('venue');
             $table->string('schedule');
             $table->string("theme");
-            $table->string('election_status');
+            $table->string('election_status')->default('pending');
+            $table->string('convention_status')->default('inactive');
             $table->timestamps();
         });
     }

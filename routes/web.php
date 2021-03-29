@@ -41,6 +41,7 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
         Route::get('/', 'AdminController@index');
+        Route::get('/users', 'AdminController@users');
         Route::get('/convention/create', 'ConventionController@create');
         Route::post('/convention', 'ConventionController@store');
         Route::get('/convention/activate/{convention}', 'ConventionController@activate');

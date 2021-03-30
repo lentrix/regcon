@@ -15,15 +15,13 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('convention_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('participant_id')->unsigned();
             $table->string('status')->nullable(); //accepted or declined
             $table->string('reason')->nullable(); //reason for declining
             $table->string('tagline')->nullable();
             $table->timestamps();
 
-            $table->foreign('convention_id')->references('id')->on('conventions');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('participant_id')->references('id')->on('participants');
         });
     }
 

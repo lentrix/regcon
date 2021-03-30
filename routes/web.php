@@ -43,6 +43,10 @@ Route::group(['middleware'=>'auth'], function() {
         Route::get('/', 'AdminController@index');
         Route::get('/users', 'AdminController@users');
         Route::get('/user/{user}', 'AdminController@user');
+
+        Route::post('/participation/add', 'AdminController@registerParticipant');
+        Route::put('/participation','AdminController@updateParticipant');
+
         Route::get('/convention/create', 'ConventionController@create');
         Route::post('/convention', 'ConventionController@store');
         Route::get('/convention/activate/{convention}', 'ConventionController@activate');

@@ -49,4 +49,10 @@ class User extends Authenticatable
         // return asset("upload/$this->id.png");
 
     }
+
+    public function participation($conventionId) {
+        $p = Participant::where('user_id',$this->id)
+                ->where('convention_id', $conventionId)->first();
+        return $p;
+    }
 }

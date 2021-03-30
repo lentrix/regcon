@@ -45,7 +45,7 @@
         <button id="upload-img"
                 title="Upload a new profile picture"
                 class="btn btn-sm btn-info"
-                style="position: absolute; bottom:13px; right: 98px; visibility: hidden">
+                style="position: absolute; bottom:23px; right: 118px; visibility: hidden">
             <i class="fa fa-camera"></i>
         </button>
     </div>

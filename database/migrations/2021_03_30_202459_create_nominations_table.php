@@ -15,14 +15,12 @@ class CreateNominationsTable extends Migration
     {
         Schema::create('nominations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('convention_id')->unsigned();
             $table->bigInteger('nominator')->unsigned();
             $table->bigInteger('nominee')->unsigned();
             $table->timestamps();
 
-            $table->foreign('convention_id')->references('id')->on('conventions');
-            $table->foreign('nominator')->references('id')->on('users');
-            $table->foreign('nominee')->references('id')->on('users');
+            $table->foreign('nominator')->references('id')->on('participants');
+            $table->foreign('nominee')->references('id')->on('participants');
         });
     }
 

@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{url('/contact-us')}}">
+                    <a class="nav-link" href="{{url('/election')}}">
                         <i class="fa fa-hand-o-up"></i> Election
                     </a>
                 </li>

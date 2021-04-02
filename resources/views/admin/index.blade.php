@@ -8,7 +8,7 @@
 <div class="row">
     @include('admin.sidemenu')
 
-    <div class="col-md-5">
+    <div class="col-md-9">
         <h2>
             <a href="{{url('/admin/convention/create')}}"
                 class="btn btn-primary btn-sm" title="Create Convetion">
@@ -17,12 +17,23 @@
             Conventions
         </h2>
         <table class="table table-sm table-striped">
-        @foreach($conventions as $conv)
-            <tr><th>Title</th><td>{{$conv->title}}</td></tr>
-            <tr><th>Hosted by</th><td>{{$conv->host_school}}</td></tr>
-            <tr><th>Convention Chair</th><td>{{$conv->chairman}}</td></tr>
-            <tr><th>Schedule</th><td>{{$conv->schedule}}</td></tr>
-            <tr><th>Status</th>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Host School</th>
+                    <th>Convention Chair</th>
+                    <th>Schedule</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($conventions as $conv)
+
+            <tr>
+                <td>{{$conv->title}}</td>
+                <td>{{$conv->host_school}}</td>
+                <td>{{$conv->chairman}}</td>
+                <td>{{$conv->schedule}}</td>
                 <td>
                     {{$conv->convention_status}}
                     @if($conv->convention_status=='inactive')
@@ -33,34 +44,12 @@
                     @endif
                 </td>
             </tr>
-        @endforeach
+
+            @endforeach
+            </tbody>
         </table>
     </div>
-    <div class="col-md-4">
-        @if($activeConv)
-            <h2>Election Phase: {{$activeConv->election_status}}</h2>
-            {!! Form::open(['url'=>'/admin/election/status','method'=>'post']) !!}
 
-            <div class="form-group">
-                {!! Form::label('election_status', "Change Election Phase") !!}
-                {!! Form::select('election_status', [
-                    'pending'=>'Pending',
-                    'nomination'=>'Nomination State',
-                    'confirmation'=>'Confirmation State',
-                    'election'=>'Election Proper',
-                    'result'=>'Final Result'
-                ], $activeConv->election_status, ['class'=>'form-control','placeholder'=>'Select phase']) !!}
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">
-                    Change Election Phase
-                </button>
-            </div>
-
-            {!! Form::close() !!}
-        @endif
-    </div>
 </div>
 
 @endSection

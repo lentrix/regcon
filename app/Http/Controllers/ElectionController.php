@@ -14,4 +14,21 @@ class ElectionController extends Controller
         $conv->save();
         return redirect()->back()->with('Info','The Election phase has been changed.');
     }
+
+    public function index() {
+        $conv = \App\Convention::where('convention_status','active')->first();
+        return view('admin.election.index', [
+            'activeConv' => $conv
+        ]);
+    }
+
+    public function nomination() {
+        $user = auth()->user();
+        return view('elections.nomination', compact('user'));
+    }
+
+    public function home() {
+        $conv = \App\Convention::where('convention_status','active')->first();
+        return view('elections.index', compact('conv'));
+    }
 }

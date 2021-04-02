@@ -39,6 +39,8 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::post('image-cropper/upload','ImageCropperController@upload');
 
+    Route::get('/election', 'ElectionController@home');
+
     Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
         Route::get('/', 'AdminController@index');
         Route::get('/users', 'AdminController@users');
@@ -51,6 +53,7 @@ Route::group(['middleware'=>'auth'], function() {
         Route::post('/convention', 'ConventionController@store');
         Route::get('/convention/activate/{convention}', 'ConventionController@activate');
 
+        Route::get('/election', 'ElectionController@index');
         Route::post('/election/status', 'ElectionController@changeState');
     });
 });

@@ -4,6 +4,7 @@
 
 <?php $pt = $user->participation(\App\Convention::getActive()->id); ?>
 
+@if($pt)
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -33,6 +34,7 @@
         </div>
     </div>
 </div>
+@endif
 
 <div class="row">
     <div class="col-md-7">

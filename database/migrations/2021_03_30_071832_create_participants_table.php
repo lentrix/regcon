@@ -21,6 +21,8 @@ class CreateParticipantsTable extends Migration
             $table->float('amount_paid')->default(0);
             $table->string('payment_channel')->nullable();
             $table->string('accepted_by');
+            $table->timestamp('nominated_at')->nullable();
+            $table->timestamp('voted_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('convention_id')->references('id')->on('conventions');
             $table->unique(['user_id','convention_id']);

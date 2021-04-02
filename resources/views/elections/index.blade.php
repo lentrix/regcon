@@ -4,10 +4,18 @@
 
 <h1>PSITE-7 Election Facility</h1>
 
-@if($conv->election_status=='nomination')
+@if($conv!=null && $conv->election_status=='nomination')
 
-    @include("elections._nomination")
+    <div id="app">
+        <nomination></nomination>
+    </div>
 
 @endif
+
+@endsection
+
+@section('scripts')
+
+<script src='{{mix("js/app.js")}}'></script>
 
 @endsection

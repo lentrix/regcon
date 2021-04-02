@@ -60,7 +60,7 @@
             </div>
             <div class="card-body">
                 <div style="width: 100%; display:flex; margin-bottom: 20px">
-                    <img src="{{$user->imgUrl()}}" alt="Profile Picture" class="profile-pic">
+                    <img src="{{$user->imgUrl}}" alt="Profile Picture" class="profile-pic">
                 </div>
                 <table class="table table-striped table-sm">
                     <tr><th>Name</th><td>{{$user->lname}}, {{$user->fname}}</td></tr>

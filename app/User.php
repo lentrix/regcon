@@ -38,7 +38,9 @@ class User extends Authenticatable
         'voted_at' => 'datetime'
     ];
 
-    public function imgUrl() {
+    protected $appends = ['imgUrl'];
+
+    public function getImgUrlAttribute() {
 
         if(file_exists(public_path('upload/' . $this->id . '.png'))) {
             return asset("upload/$this->id.png");
@@ -54,5 +56,9 @@ class User extends Authenticatable
         $p = Participant::where('user_id',$this->id)
                 ->where('convention_id', $conventionId)->first();
         return $p;
+    }
+
+    public function participants() {
+        return $this->hasMany('App\Participant');
     }
 }

@@ -37,8 +37,12 @@ class UserController extends Controller
     }
 
     public function list() {
+        $conv = \App\Convention::getActive();
+
         $users = User::whereNotNull('email_verified_at')
-                ->orderByRaw('lname, fname')->get();
+                ->whereHas('participants', function($query) use ($conv){
+                    $query->where('convention_id', $conv->id);
+                })->orderByRaw('lname, fname')->get();
         return view('users.list', compact('users'));
     }
 }

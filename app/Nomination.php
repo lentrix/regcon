@@ -9,11 +9,11 @@ class Nomination extends Model
     protected $fillable = ['nominator','nominee'];
 
     public function theNominee() {
-        return $this->belongsTo(User::class,'nominee','id');
+        return $this->belongsTo(Participant::class,'nominee','id');
     }
 
     public function theNominator() {
-        return $this->belongsTo(User::class,'nominator','id');
+        return $this->belongsTo(Participant::class,'nominator','id');
     }
 
 }

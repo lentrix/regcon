@@ -22,6 +22,7 @@ class CreateParticipantsTable extends Migration
             $table->string('payment_channel')->nullable();
             $table->string('accepted_by');
             $table->timestamp('nominated_at')->nullable();
+            $table->string('nomination_response')->nullable();
             $table->timestamp('voted_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('convention_id')->references('id')->on('conventions');

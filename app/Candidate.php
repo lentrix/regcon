@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model
 {
-    protected $fillable = ['user_id', 'accepted_at', 'tagline'];
+    protected $fillable = ['participant_id', 'tagline'];
 
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function participant() {
+        return $this->belongsTo('App\Participant');
     }
 
 }

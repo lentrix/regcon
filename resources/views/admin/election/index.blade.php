@@ -2,11 +2,23 @@
 
 @section('content')
 
-<h1>Election Manager</h1>
+<div class="row">
+    <div class="col-md-7">
+        <h1>Election Manager</h1>
+    </div>
+    <div class="col-md-5">
+        <nav aria-label="breadcrumb" style="float: right">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{url('/admin')}}">Admin</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Election</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-5">
-        @if($activeConv)
+        @if(isset($activeConv))
             <h3>Election Phase: {{$activeConv->election_status}}</h3>
             {!! Form::open(['url'=>'/admin/election/status','method'=>'post']) !!}
 
@@ -38,5 +50,10 @@
 
 <hr>
 
+@if(isset($activeConv) && $activeConv->election_status=="nomination")
+
+    @include("admin.election._nomination")
+
+@endif
 
 @endsection

@@ -16,8 +16,6 @@ class CreateCandidatesTable extends Migration
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('participant_id')->unsigned();
-            $table->string('status')->nullable(); //accepted or declined
-            $table->string('reason')->nullable(); //reason for declining
             $table->string('tagline')->nullable();
             $table->timestamps();
 

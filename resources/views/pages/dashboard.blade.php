@@ -73,6 +73,60 @@
             @endif
         </div>
     </div>
+
+    <?php
+        $part = $user->currentParticipation;
+        $nom = $part->nominations;
+    ?>
+    @if($part && count($nom)>0 && $part->candidate==null)
+    <div class="col-md-5">
+        <div class="alert alert-success">
+            <p style="font-weight: bold; font-size: 1.2em">You have been nominated as an officer!</p>
+
+            @if($part->nomination_response==null)
+            <p>
+                Please ACCEPT or DECLINE your nomination. If there is no response
+                at the end of the nomination period, it will be assumed as DECLINED.
+            </p>
+            <div class="d-flex justify-content-between">
+                {!! Form::open(['url'=>'/election/nomination-response','method'=>'post','style'=>'width: 45%']) !!}
+                    {!! Form::hidden('nomination_id', $part->id) !!}
+                    {!! Form::hidden('response', "accepted") !!}
+                    <button class="btn btn-primary btn-block" type="submit">
+                        <i class="fa fa-check"></i> Accept
+                    </button>
+                {!! Form::close() !!}
+
+                {!! Form::open(['url'=>'/election/nomination-response','method'=>'post','style'=>'width: 45%']) !!}
+                    {!! Form::hidden('nomination_id', $part->id) !!}
+                    {!! Form::hidden('response', "declined") !!}
+                    <button class="btn btn-danger btn-block" type="submit">
+                        <i class="fa fa-ban"></i> Decline
+                    </button>
+                {!! Form::close() !!}
+            </div>
+            @elseif($part->nomination_response=="accepted")
+                Thank you for accepting your nomination. We will go over your profile and
+                membership history to determine whether you are qualified to be a candidate.
+            @else
+                Thank you for your response. We respect that you declined your nomination.
+            @endif
+
+        </div>
+    </div>
+    @endif
+
+    @if($part && $part->candidate)
+
+        <div class="col-md-5">
+            <div class="alert alert-success">
+                <strong>Congratulations!</strong> You have qualified to be a candidate for the
+                PSITE-7 Regional Officer's Election of 2021. You may now start your campaign. <br>
+                GOOD LUCK!
+            </div>
+        </div>
+
+    @endif
 </div>
 
 <hr>

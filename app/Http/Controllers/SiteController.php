@@ -93,8 +93,9 @@ class SiteController extends Controller
     }
 
     public function dashboard() {
+        $user = auth()->user();
         return view('pages.dashboard',[
-            'user' => auth()->user(),
+            'user' => $user,
         ]);
     }
 

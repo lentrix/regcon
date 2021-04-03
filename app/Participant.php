@@ -15,4 +15,12 @@ class Participant extends Model
     public function convention() {
         return $this->belongsTo('App\Convention');
     }
+
+    public function nominations() {
+        return $this->hasMany('App\Nomination','nominee','id');
+    }
+
+    public function candidate() {
+        return $this->hasOne('App\Candidate');
+    }
 }

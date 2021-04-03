@@ -43,6 +43,7 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/election/search-member', 'ElectionController@searchMember');
     Route::post('/election/nomination', 'ElectionController@nominate');
     Route::get('/election/check-nomination', 'ElectionController@checkNomination');
+    Route::post('/election/nomination-response', 'ElectionController@nominationResponse');
 
     Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
         Route::get('/', 'AdminController@index');
@@ -58,6 +59,8 @@ Route::group(['middleware'=>'auth'], function() {
 
         Route::get('/election', 'ElectionController@index');
         Route::post('/election/status', 'ElectionController@changeState');
+        Route::post('/election/add-candidate', 'ElectionController@addCandidate');
+        Route::post('/election/revoke-candidate', 'ElectionController@revokeCandidate');
 
     });
 });

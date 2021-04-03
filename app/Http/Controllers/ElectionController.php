@@ -7,6 +7,7 @@ use App\Convention;
 use App\User;
 use App\Participant;
 use App\Nomination;
+use App\Candidate;
 
 class ElectionController extends Controller
 {
@@ -21,13 +22,28 @@ class ElectionController extends Controller
 
     public function index() {
         $conv = Convention::getActive();
-        return view('admin.election.index', [
-            'activeConv' => $conv
-        ]);
+        $data= ['activeConv'=>$conv];
+
+        if($conv->election_status=="nomination") {
+            $nominees = Participant::whereHas('nominations', function($query) use ($conv){
+                            $query->where('convention_id', $conv->id);
+                        })->whereDoesntHave('candidate', function($query) use ($conv) {
+                            $query->where('convention_id', $conv->id);
+                        })->get();
+            $candidates = Candidate::whereIn('participant_id', Participant::where('convention_id', $conv->id)->select('id'))->get();
+            $data =[
+                'activeConv' => $conv,
+                'nominees' => $nominees,
+                'candidates' => $candidates
+            ];
+        }
+
+        return view('admin.election.index', $data);
     }
 
     public function home() {
         $conv = Convention::getActive();
+
         //check participation
         $participant = Participant::where('user_id', auth()->user()->id)
                 ->where('convention_id', $conv->id)->first();
@@ -94,5 +110,30 @@ class ElectionController extends Controller
         }else {
             return null;
         }
+    }
+
+    public function nominationResponse(Request $request) {
+        $user = auth()->user();
+        $part = $user->currentParticipation;
+        $part->nomination_response = $request['response'];
+        $part->save();
+
+        return redirect()->back()->with('Info','Thank you for responding to your nomination.');
+    }
+
+    public function addCandidate(Request $request) {
+        $part = Participant::find($request['participant_id']);
+        \App\Candidate::create([
+            'participant_id' => $part->id,
+            'tagline' => ''
+        ]);
+
+        return redirect()->back()->with('Info',$part->user->fname . ' has been added to the list of candidates.');
+    }
+
+    public function revokeCandidate(Request $request) {
+        $cand = Candidate::find($request['candidate_id']);
+        $cand->delete();
+        return redirect()->back()->with('Info','A candidate has been revoked.');
     }
 }

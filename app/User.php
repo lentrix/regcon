@@ -58,7 +58,14 @@ class User extends Authenticatable
         return $p;
     }
 
+    public function getCurrentParticipationAttribute() {
+        $conv = Convention::getActive();
+        return $conv ? $this->participation($conv->id) : null;
+    }
+
     public function participants() {
         return $this->hasMany('App\Participant');
     }
+
+
 }

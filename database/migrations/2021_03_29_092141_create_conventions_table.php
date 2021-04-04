@@ -22,6 +22,7 @@ class CreateConventionsTable extends Migration
             $table->string('schedule');
             $table->string("theme");
             $table->string('election_status')->default('pending');
+            $table->integer('nvotes')->default(3); //Number of officers to vote
             $table->string('convention_status')->default('inactive');
             $table->timestamps();
         });

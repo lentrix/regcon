@@ -1961,7 +1961,151 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      candidates: [],
+      selectedCandidates: [],
+      nvotes: 0,
+      votedAt: null,
+      votedCandidates: []
+    };
+  },
+  methods: {
+    getCandidates: function getCandidates() {
+      var _this = this;
+
+      axios.get('/election/candidates').then(function (response) {
+        if (response.status == 200) {
+          _this.candidates = response.data.candidates;
+          _this.nvotes = response.data.numberOfVotes;
+        }
+      });
+    },
+    selectCandidate: function selectCandidate(index) {
+      if (this.selectedCandidates.length >= this.nvotes) {
+        alert("You can only vote a maximum of " + this.nvotes + " candidates.");
+        return;
+      }
+
+      var selected = this.candidates[index];
+      this.selectedCandidates.push(selected);
+      this.candidates.splice(index, 1);
+    },
+    removeCandidate: function removeCandidate(index) {
+      var selected = this.selectedCandidates[index];
+      this.candidates.push(selected);
+      this.selectedCandidates.splice(index, 1);
+    },
+    submitVotes: function submitVotes() {
+      var _this2 = this;
+
+      axios.post('/election/submit-vote', {
+        votes: this.selectedCandidates
+      }).then(function (response) {
+        if (response.status == 200) {
+          _this2.votedAt = response.data;
+
+          _this2.getVotedCandidates();
+        }
+      });
+    },
+    getVotedCandidates: function getVotedCandidates() {
+      var _this3 = this;
+
+      axios.get('/election/voted-candidates').then(function (response) {
+        if (response.status == 200) {
+          _this3.votedCandidates = response.data;
+        }
+      });
+    },
+    checkInit: function checkInit() {
+      var _this4 = this;
+
+      axios.get('/election/voted-at').then(function (response) {
+        if (response.status == 200) {
+          _this4.votedAt = response.data;
+          console.log(_this4.votedAt);
+
+          if (_this4.votedAt == "") {
+            _this4.getCandidates();
+          } else {
+            _this4.getVotedCandidates();
+          }
+        }
+      });
+    }
+  },
+  created: function created() {
+    this.checkInit();
+  }
+});
 
 /***/ }),
 
@@ -20523,9 +20667,246 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _c("h3", [_vm._v("Election Proper")]),
+    _vm._v(" "),
+    _vm.votedAt == ""
+      ? _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-5" },
+            [
+              _c("h4", [_vm._v("List of Candidates")]),
+              _vm._v(" "),
+              _vm._l(_vm.candidates, function(candidate, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "card mb-2",
+                    staticStyle: { cursor: "pointer" },
+                    on: {
+                      click: function($event) {
+                        return _vm.selectCandidate(index)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body d-flex" }, [
+                      _c("img", {
+                        staticStyle: { width: "60px", height: "60px" },
+                        attrs: { src: candidate.imgUrl, alt: "Profile Picture" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            "margin-left": "20px",
+                            "line-height": "120%"
+                          }
+                        },
+                        [
+                          _c(
+                            "strong",
+                            { staticStyle: { "font-size": "1.2em" } },
+                            [
+                              _vm._v(
+                                _vm._s(candidate.lname) +
+                                  ", " +
+                                  _vm._s(candidate.fname)
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(_vm._s(candidate.designation) + ", "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("i", [_vm._v(_vm._s(candidate.school))])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "div col-md-6 offset-md-1" }, [
+            _c("div", { staticClass: "card" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "card-body" },
+                [
+                  _vm._l(_vm.selectedCandidates, function(candidate, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "card mb-2",
+                        staticStyle: { cursor: "pointer" },
+                        on: {
+                          click: function($event) {
+                            return _vm.removeCandidate(index)
+                          }
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "card-body d-flex" }, [
+                          _c("img", {
+                            staticStyle: { width: "60px", height: "60px" },
+                            attrs: {
+                              src: candidate.imgUrl,
+                              alt: "Profile Picture"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: {
+                                "margin-left": "20px",
+                                "line-height": "120%"
+                              }
+                            },
+                            [
+                              _c(
+                                "strong",
+                                { staticStyle: { "font-size": "1.2em" } },
+                                [
+                                  _vm._v(
+                                    _vm._s(candidate.lname) +
+                                      ", " +
+                                      _vm._s(candidate.fname)
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c("br"),
+                              _vm._v(_vm._s(candidate.designation) + ", "),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c("i", [_vm._v(_vm._s(candidate.school))])
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.submitVotes()
+                          }
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-check" }),
+                        _vm._v(" Submit Votes\n                        ")
+                      ]
+                    )
+                  ])
+                ],
+                2
+              )
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.votedAt != ""
+      ? _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-5" },
+            [
+              _c("div", { staticClass: "alert alert-success" }, [
+                _vm._v(
+                  "\n                Thank you for your participation of our PSITE-7 Regional Election.\n            "
+                )
+              ]),
+              _vm._v(" "),
+              _c("h4", [_vm._v("You've voted for the following candidates:")]),
+              _vm._v(" "),
+              _vm._l(_vm.votedCandidates, function(candidate, index) {
+                return _c(
+                  "div",
+                  {
+                    key: index,
+                    staticClass: "card mb-2",
+                    staticStyle: { cursor: "pointer" },
+                    on: {
+                      click: function($event) {
+                        return _vm.selectCandidate(index)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "card-body d-flex" }, [
+                      _c("img", {
+                        staticStyle: { width: "60px", height: "60px" },
+                        attrs: { src: candidate.imgUrl, alt: "Profile Picture" }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticStyle: {
+                            "margin-left": "20px",
+                            "line-height": "120%"
+                          }
+                        },
+                        [
+                          _c(
+                            "strong",
+                            { staticStyle: { "font-size": "1.2em" } },
+                            [
+                              _vm._v(
+                                _vm._s(candidate.lname) +
+                                  ", " +
+                                  _vm._s(candidate.fname)
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(_vm._s(candidate.designation) + ", "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c("i", [_vm._v(_vm._s(candidate.school))])
+                        ]
+                      )
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      : _vm._e()
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header bg-primary" }, [
+      _c("h4", [_vm._v("My Ballot")])
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Convention;
 use App\User;
 use App\Participant;
 use App\Nomination;
 use App\Candidate;
+use App\Vote;
 
 class ElectionController extends Controller
 {
@@ -135,5 +137,65 @@ class ElectionController extends Controller
         $cand = Candidate::find($request['candidate_id']);
         $cand->delete();
         return redirect()->back()->with('Info','A candidate has been revoked.');
+    }
+
+    public function getCandidates() {
+        $conv = Convention::getActive();
+        if($conv) {
+            $cand = User::join('participants','participants.user_id', 'users.id')
+                ->join('conventions','conventions.id', 'participants.convention_id')
+                ->join('candidates','candidates.participant_id', 'participants.id')
+                ->select([
+                    'users.lname', 'users.fname', 'users.designation','users.school',
+                    'candidates.participant_id',
+                    'candidates.id AS candidate_id'
+                ])->get();
+            return [
+                'candidates' => $cand,
+                'numberOfVotes' => $conv->nvotes
+            ];
+        }else {
+            return [];
+        }
+    }
+
+    public function getVotedAt() {
+        $user = auth()->user();
+        $part = $user->currentParticipation;
+        return $part->voted_at;
+    }
+
+    public function submitVote(Request $request) {
+        $user = auth()->user();
+        $part = $user->currentParticipation;
+
+        foreach($request['votes'] as $vote) {
+            Vote::create([
+                'participant_id' => $part->id,
+                'candidate_id' => $vote['candidate_id']
+            ]);
+        }
+
+        $part->voted_at = now();
+        $part->save();
+        return $part->voted_at;
+    }
+
+    public function getVotedCandidates() {
+        $user = auth()->user();
+        $part = $user->currentParticipation;
+        $data = [];
+        foreach($part->votes as $vote) {
+            $user = $vote->candidate->participant->user;
+            $data[]=[
+                'lname'=>$user->lname,
+                'fname'=>$user->fname,
+                'designation' => $user->designation,
+                'school' => $user->school,
+                'candidate_id' => $vote->candidate_id,
+                'imgUrl' => $user->imgUrl
+            ];
+        }
+        return $data;
     }
 }

@@ -44,6 +44,10 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/election/nomination', 'ElectionController@nominate');
     Route::get('/election/check-nomination', 'ElectionController@checkNomination');
     Route::post('/election/nomination-response', 'ElectionController@nominationResponse');
+    Route::get('/election/candidates', 'ElectionController@getCandidates');
+    Route::get('/election/voted-at', 'ElectionController@getVotedAt');
+    Route::post('/election/submit-vote', 'ElectionController@submitVote');
+    Route::get('/election/voted-candidates','ElectionController@getVotedCandidates');
 
     Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
         Route::get('/', 'AdminController@index');

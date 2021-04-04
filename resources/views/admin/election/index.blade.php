@@ -29,7 +29,6 @@
                     {!! Form::select('election_status', [
                         'pending'=>'Pending',
                         'nomination'=>'Nomination State',
-                        'confirmation'=>'Confirmation State',
                         'election'=>'Election Proper',
                         'result'=>'Final Result'
                     ], $activeConv->election_status, ['class'=>'form-control','placeholder'=>'Select phase']) !!}

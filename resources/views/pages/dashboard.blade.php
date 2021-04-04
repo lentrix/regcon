@@ -76,7 +76,7 @@
 
     <?php
         $part = $user->currentParticipation;
-        $nom = $part->nominations;
+        $nom = $part ? $part->nominations : [];
     ?>
     @if($part && count($nom)>0 && $part->candidate==null)
     <div class="col-md-5">
@@ -120,8 +120,8 @@
 
         <div class="col-md-5">
             <div class="alert alert-success">
-                <strong>Congratulations!</strong> You have qualified to be a candidate for the
-                PSITE-7 Regional Officer's Election of 2021. You may now start your campaign. <br>
+                <strong>Congratulations!</strong> You have qualified as a candidate for the
+                PSITE-7 Regional Officer's Election. You may now start your campaign.
                 GOOD LUCK!
             </div>
         </div>

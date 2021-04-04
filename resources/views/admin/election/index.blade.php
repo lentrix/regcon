@@ -50,9 +50,9 @@
 <hr>
 
 @if(isset($activeConv) && $activeConv->election_status=="nomination")
-
     @include("admin.election._nomination")
-
+@elseif(isset($activeConv) && $activeConv->election_status=="election")
+    @include('admin.election._vote-count')
 @endif
 
 @endsection

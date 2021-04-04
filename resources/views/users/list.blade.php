@@ -11,7 +11,7 @@
             <img src='{{$user->imgUrl}}' alt="pic" class="participant-list-img">
             <div class="info">
                 <strong>{{$user->fname}} {{$user->lname}}</strong><br>
-                <i>{{$user->designation}}</i><br>
+                {{$user->email}} | <i>{{$user->designation}}</i><br>
                 {{$user->school}}
             </div>
         </div>

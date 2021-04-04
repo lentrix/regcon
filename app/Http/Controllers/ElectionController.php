@@ -26,7 +26,7 @@ class ElectionController extends Controller
         $conv = Convention::getActive();
         $data= ['activeConv'=>$conv];
 
-        if($conv->election_status=="nomination") {
+        if($conv->election_status=="nomination" || $conv->election_status=="election") {
             $nominees = Participant::whereHas('nominations', function($query) use ($conv){
                             $query->where('convention_id', $conv->id);
                         })->whereDoesntHave('candidate', function($query) use ($conv) {

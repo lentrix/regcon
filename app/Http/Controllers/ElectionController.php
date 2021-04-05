@@ -38,6 +38,11 @@ class ElectionController extends Controller
                 'nominees' => $nominees,
                 'candidates' => $candidates
             ];
+        }elseif($conv->election_status=="result") {
+            $data = [
+                'activeConv' => $conv,
+                'results' => $conv->electionResults()
+            ];
         }
 
         return view('admin.election.index', $data);
@@ -197,5 +202,15 @@ class ElectionController extends Controller
             ];
         }
         return $data;
+    }
+
+    public function getElectionResults() {
+        $conv = Convention::getActive();
+        $results = null;
+        if($conv) {
+            $results = $conv->electionResults();
+        }
+
+        return $results;
     }
 }

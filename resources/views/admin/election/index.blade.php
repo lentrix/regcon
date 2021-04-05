@@ -53,6 +53,8 @@
     @include("admin.election._nomination")
 @elseif(isset($activeConv) && $activeConv->election_status=="election")
     @include('admin.election._vote-count')
+@elseif(isset($activeConv) && $activeConv->election_status=="result")
+    @include('admin.election._final-result')
 @endif
 
 @endsection

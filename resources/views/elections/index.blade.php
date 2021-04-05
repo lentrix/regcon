@@ -16,6 +16,12 @@
     </div>
 @endif
 
+@if($conv!=null && $conv->election_status=='result')
+    <div id="app">
+        <results></results>
+    </div>
+@endif
+
 @endsection
 
 @section('scripts')

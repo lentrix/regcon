@@ -67,6 +67,14 @@ Route::group(['middleware'=>'auth'], function() {
         Route::post('/election/add-candidate', 'ElectionController@addCandidate');
         Route::post('/election/revoke-candidate', 'ElectionController@revokeCandidate');
 
+        Route::get('/raffles', 'RaffleController@index');
+        Route::get('/raffles/new-item', 'RaffleController@create');
+        Route::post('/raffles/new-item', 'RaffleController@store');
+        Route::get('/raffles/edit/{item}', 'RaffleController@edit');
+        Route::put('/raffles/edit/{item}', 'RaffleController@update');
+        Route::get('/raffles/draw', 'RaffleController@draw');
+        Route::get('/raffles/items', 'RaffleController@getItems');
+        Route::get('/raffles/draws', 'RaffleController@drawWinners');
     });
 });
 

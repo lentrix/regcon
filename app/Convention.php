@@ -16,6 +16,10 @@ class Convention extends Model
         return $this->hasMany('App\Participant');
     }
 
+    public function raffleItems() {
+        return $this->hasMany('App\RaffleItem');
+    }
+
     public function electionResults() {
         $candidates = Candidate::whereIn('participant_id', Participant::where('convention_id', $this->id)->select('id'))->get();
         $data = [];

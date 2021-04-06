@@ -27,4 +27,8 @@ class Participant extends Model
     public function votes() {
         return $this->hasMany('App\Vote');
     }
+
+    public function raffleDraw() {
+        return $this->hasMany('App\RaffleDraw');
+    }
 }

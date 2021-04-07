@@ -12,19 +12,21 @@ class RaffleController extends Controller
 {
     public function index() {
         $conv = Convention::getActive();
-        $raffleDraws = $this->drawWinners($conv);
+        $raffleDraws = $this->drawWinners();
         return view('admin.raffles.index', [
             'raffleItems' => $conv->raffleItems,
             'raffleDraws' => $raffleDraws
         ]);
     }
 
-    public function drawWinners($conv) {
+    public function drawWinners() {
+        $conv = Convention::getActive();
         return RaffleDraw::join('participants', 'raffle_draws.participant_id', 'participants.id')
                 ->join('users', 'participants.user_id', 'users.id')
                 ->join('raffle_items', 'raffle_draws.raffle_item_id', 'raffle_items.id')
                 ->where('participants.convention_id', $conv->id)
                 ->select(['users.lname', 'users.fname', 'users.school', 'raffle_items.itemName', 'raffle_items.sponsor'])
+                ->orderByRaw('raffle_draws.created_at DESC')
                 ->get();
     }
 
@@ -78,7 +80,9 @@ class RaffleController extends Controller
     /** On-API */
     public function getItems() {
         $conv = Convention::getActive();
-        $raffleItems = RaffleItem::where('convention_id', $conv->id)->get();
+        $raffleItems = RaffleItem::where('convention_id', $conv->id)
+                ->where('qty','>',0)
+                ->get();
         return $raffleItems;
     }
 
@@ -86,5 +90,44 @@ class RaffleController extends Controller
     public function getRaffleDraws() {
         $conv = Convention::getActive();
         return $this->drawWinners($conv);
+    }
+
+    /** On-API */
+    public function getParticipants($exclusive) {
+        $conv = Convention::getActive();
+        $part = \App\Participant::where('convention_id', $conv->id);
+
+        if($exclusive=="true") {
+            $part->whereDoesntHave('raffleDraw');
+        }
+
+        $part->with('user');
+
+        $data = [];
+
+        foreach($part->get() as $p) {
+            $user = $p->user;
+            $data[] = [
+                'lname' => $user->lname,
+                'fname' => $user->fname,
+                'school' => $user->school,
+                'imgUrl' => $user->imgUrl,
+                'participant_id' => $p->id
+            ];
+        }
+
+        return $data;
+    }
+
+    /** On-API */
+    public function commit(Request $request) {
+        \App\RaffleDraw::create([
+            'raffle_item_id' => $request['raffle_item_id'],
+            'participant_id' => $request['participant_id']
+        ]);
+
+        $item = \App\RaffleItem::find($request['raffle_item_id']);
+        $item->qty-=1;
+        $item->save();
     }
 }

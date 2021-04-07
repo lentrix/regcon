@@ -75,6 +75,8 @@ Route::group(['middleware'=>'auth'], function() {
         Route::get('/raffles/draw', 'RaffleController@draw');
         Route::get('/raffles/items', 'RaffleController@getItems');
         Route::get('/raffles/draws', 'RaffleController@drawWinners');
+        Route::get('/raffles/participants/{exclusive}', 'RaffleController@getParticipants');
+        Route::post('/raffles/commit', 'RaffleController@commit');
     });
 });
 

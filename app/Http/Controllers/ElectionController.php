@@ -51,9 +51,14 @@ class ElectionController extends Controller
     public function home() {
         $conv = Convention::getActive();
 
-        //check participation
-        $participant = Participant::where('user_id', auth()->user()->id)
-                ->where('convention_id', $conv->id)->first();
+        if($conv) {
+            //check participation
+            $participant = Participant::where('user_id', auth()->user()->id)
+            ->where('convention_id', $conv->id)->first();
+        }else {
+            $participant = null;
+        }
+
         if($participant) {
             return view('elections.index', compact('conv'));
         }else {

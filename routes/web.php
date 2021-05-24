@@ -27,6 +27,14 @@ Route::get('/login', 'SiteController@loginForm');
 
 Route::get('/unauthorized','SiteController@unauthorized');
 
+Route::get('/contact-us', function(){
+    return view('pages.contact-us');
+});
+
+Route::get('/about', function(){
+    return view('pages.about');
+});
+
 Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
@@ -49,6 +57,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::post('/election/submit-vote', 'ElectionController@submitVote');
     Route::get('/election/voted-candidates','ElectionController@getVotedCandidates');
     Route::get('/election/results', 'ElectionController@getElectionResults');
+
+    Route::get('/raffle', 'RaffleController@userIndex');
 
     Route::group(['middleware'=>'admin','prefix'=>'admin'], function() {
         Route::get('/', 'AdminController@index');

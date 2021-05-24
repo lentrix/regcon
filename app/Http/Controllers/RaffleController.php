@@ -19,6 +19,16 @@ class RaffleController extends Controller
         ]);
     }
 
+    public function userIndex() {
+        $drawWinners = $this->drawWinners();
+        $myWin = RaffleDraw::where('participant_id', auth()->user()->id)->get();
+
+        return view('raffles.index',[
+            'drawWinners' => $drawWinners,
+            'myWin' => $myWin
+        ]);
+    }
+
     public function drawWinners() {
         $conv = Convention::getActive();
         return RaffleDraw::join('participants', 'raffle_draws.participant_id', 'participants.id')

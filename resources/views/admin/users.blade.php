@@ -94,7 +94,11 @@
                 <strong>{{$user->school}}</strong> <br>
                 <i style="font-size: 0.95em">{{$user->designation}}</i>
             </td>
-            <td></td>
+            <td>
+                @if($user->currentParticipation)
+                <i class="fa fa-check text-success"></i>
+                @endif
+            </td>
             <td class="text-center">
                 <a href='{{url("/admin/user/$user->id")}}' class="btn btn-dark btn-sm" title="Manage this user">
                     <i class="fa fa-cog"></i>

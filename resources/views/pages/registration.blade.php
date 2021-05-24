@@ -56,12 +56,12 @@
                             relevant to the PSITE-7 Regional Convention of 2021.
                         </p>
                         <div class="form-group">
-                            <button class="btn btn-lg btn-primary float-right">
+                            <button class="btn btn-lg btn-primary">
                                 <i class="fa fa-check"></i>
                                 Register
                             </button>
                         </div>
-                        <div class="float-left">
+                        <div class="form-group">
                             Already have an account? <br>
                             <a href="{{url('/')}}" class="btn btn-success">
                                 &nbsp;&nbsp;&nbsp;

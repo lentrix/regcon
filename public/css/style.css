@@ -46,18 +46,20 @@ body {
 .participants-list-box {
     border: 1px solid rgb(0, 55, 107);
     background-color: aliceblue;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     display: flex;
-    height: 67px;
+    height: 80px;
     width: 320px;
+    overflow: hidden;
 }
 
 .participants-list-box>.info{
     line-height: 95%;
-    padding: 2px 5px;
+    padding: 8px;
+    font-size: 0.86em;
 }
 
 .participant-list-img {
-    height: 65px;
+    height: 78px;
 
 }

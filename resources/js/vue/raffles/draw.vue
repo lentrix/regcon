@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-4">
                 <h4>Drawable Items</h4>
-                <label><input type="checkbox" :checked="exclusive" @click="getParticipants()"> Exclude Previous Winners</label>
+                <label><input type="checkbox" v-model="exclusive" @change="getParticipants()"> Exclude Previous Winners</label>
                 <ul class="list-group">
                     <li class="list-group-item d-flex" style="cursor:pointer; line-height:110%"
                             v-for="(item, index) in items" v-bind:key="index" @click="drawItem(index)">
@@ -97,7 +97,8 @@ export default {
             axios.get('/admin/raffles/participants/' + (this.exclusive ? "true" : "false"))
                     .then(response=>{
                         if(response.status == 200) {
-                            this.participants = response.data
+                            this.participants = response.data;
+                            console.log(this.exclusive, this.participants);
                         }
                     })
         },
@@ -137,6 +138,7 @@ export default {
                     this.reset();
                     this.getDraws();
                     this.getItems();
+                    this.getParticipants();
                 }
             })
         }

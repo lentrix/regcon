@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
+use App\Convention;
 use Mail;
 
 class SiteController extends Controller
@@ -45,7 +46,9 @@ class SiteController extends Controller
         $this->sendMailConfirmation($user);
 
         return redirect('/')->with('Info','The registration has been submitted.
-                Please check your email for verification to complete your registration.');
+                Please check your email for verification to complete your registration.
+                If you don\'t see your email in your inbox, please check your spam mail.
+                Some email servers mistakenly tag our notfication mail as spam.');
     }
 
     public function sendMailConfirmation($user) {
@@ -94,8 +97,10 @@ class SiteController extends Controller
 
     public function dashboard() {
         $user = auth()->user();
+        $convention = Convention::getActive();
         return view('pages.dashboard',[
             'user' => $user,
+            'convention' => $convention
         ]);
     }
 

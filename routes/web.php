@@ -39,6 +39,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::get('/dashboard', 'SiteController@dashboard');
     Route::get('/logout', 'SiteController@logout');
 
+    Route::post('/submit-proof-of-payment','ParticipationController@submitProofOfPayment');
+
     Route::get('/user/edit/{user}', 'UserController@edit');
     Route::post('/user/edit/{user}', 'UserController@update');
     Route::post('/user/change-password/{user}', 'UserController@changePassword');
@@ -87,6 +89,9 @@ Route::group(['middleware'=>'auth'], function() {
         Route::get('/raffles/draws', 'RaffleController@drawWinners');
         Route::get('/raffles/participants/{exclusive}', 'RaffleController@getParticipants');
         Route::post('/raffles/commit', 'RaffleController@commit');
+
+        Route::get('/proofs', 'ParticipationController@showProofs');
+        Route::post('/verify-proof/{proof}', 'ParticipationController@verifyPayment');
     });
 });
 

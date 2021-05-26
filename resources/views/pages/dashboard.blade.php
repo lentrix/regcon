@@ -133,6 +133,63 @@
 
 <h4>Bulletin of Information</h4>
 
+@if($part)
+
+<ul class="nav nav-tabs" id="bulletin">
+    <li class="nav-item">
+        <a class="nav-link tab-link active" id="program-tab" href="#bulletin">Program</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link tab-link" id="announcements-tab" href="#bulletin">Announcements</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link tab-link" id="comments-tab" href="#bulletin">Comments & Suggestions</a>
+    </li>
+</ul>
+
+<div id="program" class="info-block bg-light">
+    <embed src="{{asset('upload/program/' . $part->convention_id . ".pdf")}}"
+        style="width: 100%; height: 80vh"
+        type="application/pdf">
+</div>
+<div class="info-block" id="announcements" style="display: none">
+    <div class="alert alert-info">
+        <h4>Announcements</h4>
+        <p>No announcements for now.</p>
+    </div>
+</div>
+<div class="info-block" id="comments" style="display: none">
+    <div class="mt-3">
+        <h4>Comments & Suggestions</h4>
+        <p>This module is under development</p>
+    </div>
+</div>
+
+@else
+
+    @if($proof = $user->proof())
+        <div class="alert alert-info">
+            We have received your proof of payment and is currently under verification.
+            You shall be enlisted as a participant once your payment is verified.
+            Thank you for your understanding. <br>
+            <div class="mt-2"><strong>Payment Details:</strong></div>
+            <table class="table table-striped">
+                <tr><th>Amount Paid</th><td>{{$proof->payment_amount}}</td></tr>
+                <tr><th>Payment Channel</th><td>{{$proof->payment_channel}}</td></tr>
+                <tr>
+                    <th>Proof</th>
+                        <td>
+                            <img src="{{asset('upload/proofs/' . $proof->id . ".jpg")}}" alt="proof of payment" style="width: 100%">
+                        </td>
+                    </tr>
+            </table>
+        </div>
+    @else
+        @include('partials.proof-form')
+    @endif
+
+@endif
+
 @endsection
 
 @section('scripts')
@@ -151,6 +208,30 @@ $(document).ready(function(){
 
     $(".close-modal").click(function(){
         $("#modal").modal('hide');
+    })
+
+    $("#announcements-tab").click(function(event){
+        event.preventDefault()
+        $(".info-block").css('display','none');
+        $("#announcements").css('display','block');
+        $(".tab-link").removeClass('active');
+        $(this).addClass('active');
+    })
+
+    $("#program-tab").click(function(event){
+        event.preventDefault();
+        $(".info-block").css('display','none');
+        $("#program").css('display','block');
+        $(".tab-link").removeClass('active');
+        $(this).addClass('active');
+    })
+
+    $("#comments-tab").click(function(event){
+        event.preventDefault();
+        $(".info-block").css('display','none');
+        $("#comments").css('display','block');
+        $(".tab-link").removeClass('active');
+        $(this).addClass('active');
     })
 });
 

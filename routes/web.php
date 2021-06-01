@@ -37,6 +37,8 @@ Route::get('/password-recovery/{token}','SiteController@recoverPassword');
 
 Route::post('/change-password', 'SiteController@changePassword');
 
+Route::post('/resend-email-verification', 'SiteController@resendEmailVerification');
+
 Route::get('/about', function(){
     return view('pages.about');
 });

@@ -162,4 +162,16 @@ class SiteController extends Controller
 
         return redirect('/')->with('Info','Your password has been changed successfully! You may login now.');
     }
+
+    public function resendEmailVerification(Request $request) {
+        $user = User::findOrFail($request['user_id']);
+
+        $user->email_token = Str::random(40);
+        $user->save();
+
+        $this->sendMailConfirmation($user);
+
+        return redirect('/')->with('Info','An email has been sent to ' . $user->email
+                . '. Please check your spam if you cannot find this email in your inbox.');
+    }
 }

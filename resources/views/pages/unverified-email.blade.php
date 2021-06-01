@@ -14,5 +14,16 @@
             Login
             &nbsp;&nbsp;&nbsp;
         </a>
+        <br>
+        Still, no verification email found? <br>
+        {!! Form::open(['url'=>'resend-email-verification', 'method'=>'post']) !!}
+
+        {!! Form::hidden('user_id', $user->id) !!}
+
+        <button class="btn btn-success" type="submit">
+            Resend Email Verification
+        </button>
+
+        {!! Form::close() !!}
     </div>
 @endsection
